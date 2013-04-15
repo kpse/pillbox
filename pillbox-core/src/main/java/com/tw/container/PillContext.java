@@ -34,7 +34,7 @@ public class PillContext {
 
     public Object lookupFromCache(String pillName) {
         Map objectInfo = getPill(pillName);
-        if (objectInfo.containsKey(SCOPE) && SINGLETON_SCOPE.equals(objectInfo.get(SCOPE))) {
+        if (objectInfo.containsKey(SCOPE) && Lifecycle.isSingleton(objectInfo.get(SCOPE))) {
             return allInstancesCache.get(pillName);
         }
         return null;
@@ -47,5 +47,10 @@ public class PillContext {
         }
         allInstancesCache.put(cacheKey, target);
 
+    }
+
+    public <T> void updateLifecycle(Class<T> aClass, Lifecycle lifecycle) {
+        Map objectInfo = getPill(aClass.getCanonicalName());
+        objectInfo.put(SCOPE, lifecycle.scopeName());
     }
 }

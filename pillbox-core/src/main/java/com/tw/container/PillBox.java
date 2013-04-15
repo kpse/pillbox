@@ -1,18 +1,21 @@
 package com.tw.container;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.sun.istack.internal.Nullable;
 import com.tw.annotation.PillScanner;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.collect.Iterators.all;
+import static com.google.common.collect.Iterators.find;
 import static com.google.common.collect.Iterators.transform;
 
 public class PillBox {
@@ -87,15 +90,26 @@ public class PillBox {
             IllegalAccessException,
             InvocationTargetException {
         final List<Class<?>> classesOfArgs = getClassesOfArgs(argPills);
-        Constructor<?> ctor = clazz.getConstructor(classesOfArgs.toArray(new Class<?>[0]));
+        Constructor<?> ctor = matchConstructor(clazz, classesOfArgs);
         final List<Object> objectsOfArgs = getObjectsOfArgs(argPills);
         return ctor.newInstance(objectsOfArgs.toArray());
+    }
+
+    private Constructor<?> matchConstructor(Class<?> clazz, List<Class<?>> classesOfArgs) throws NoSuchMethodException {
+        try {
+            return clazz.getConstructor(classesOfArgs.toArray(new Class<?>[0]));
+        } catch (NoSuchMethodException e) {
+            return clazz.getConstructors()[0];
+        } catch (SecurityException e) {
+
+        }
+        return null;
     }
 
     private List<Object> getObjectsOfArgs(Map<String, String> argPills) {
         return Lists.newArrayList(transform(argPills.entrySet().iterator(), new Function<Map.Entry<String, String>, Object>() {
             @Override
-            public Object apply(@Nullable Map.Entry<String, String> entry) {
+            public Object apply(Map.Entry<String, String> entry) {
                 try {
                     return createRawPill(entry.getValue());
                 } catch (ClassNotFoundException e) {
@@ -113,7 +127,7 @@ public class PillBox {
     private List<Class<?>> getClassesOfArgs(Map<String, String> args) {
         return Lists.newArrayList(transform(args.entrySet().iterator(), new Function<Map.Entry<String, String>, Class<?>>() {
             @Override
-            public Class<?> apply(@Nullable Map.Entry<String, String> entry) {
+            public Class<?> apply(Map.Entry<String, String> entry) {
                 try {
                     return pillContext.getPillClass(entry.getValue());
                 } catch (ClassNotFoundException e) {
@@ -134,5 +148,41 @@ public class PillBox {
 
     public static PillBox fromScanner(PillScanner pillScanner) {
         return new PillBox(new PillContext(pillScanner.getPillMap()));
+    }
+
+    public static PillBox fromMap(Map<Class, Class> classHashMap, Map<Class, Lifecycle> lifecycleMap) {
+        Map<Object, Object> pillMap = Maps.newHashMap();
+        for (Map.Entry<Class, Class> clazzEntry : classHashMap.entrySet()) {
+            Map<Object, Object> objectMap = Maps.newHashMap();
+            objectMap.put("class", clazzEntry.getValue().getCanonicalName());
+            objectMap.put("constructor-args", buildConstructorArgs(clazzEntry.getValue()));
+            objectMap.put("scope", lifecycleMap.get(clazzEntry.getKey()).scopeName());
+            pillMap.put(clazzEntry.getKey().getCanonicalName(), objectMap);
+            pillMap.put(clazzEntry.getValue().getCanonicalName(), objectMap);
+        }
+        return new PillBox(new PillContext(pillMap));
+    }
+
+    private static Map<String, String> buildConstructorArgs(Class implClass) {
+        final List<Constructor> constructors = Lists.newArrayList(implClass.getConstructors());
+        final Constructor<?> constructor = constructors.get(0);
+        return reportConstructorArgs(constructor);
+    }
+
+    private static Map<String, String> reportConstructorArgs(Constructor<?> constructor) {
+        final Map<String, String> map = Maps.newHashMap();
+        for (Class<?> para : constructor.getParameterTypes()) {
+            map.put(para.getCanonicalName(), para.getCanonicalName());
+        }
+        return map;
+    }
+
+    public <T> T createPill(Class<T> aClass) throws NoSuchMethodException, IllegalAccessException, InstantiationException, ClassNotFoundException, InvocationTargetException, NoSuchFieldException {
+        return createPill(aClass.getCanonicalName());
+    }
+
+    public <T> PillBox updateLifecycle(Class<T> aClass, Lifecycle lifecycle) {
+        pillContext.updateLifecycle(aClass, lifecycle);
+        return this;
     }
 }
