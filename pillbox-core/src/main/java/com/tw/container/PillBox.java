@@ -1,10 +1,8 @@
 package com.tw.container;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.UnmodifiableIterator;
 import com.tw.annotation.PillScanner;
 import com.tw.container.exception.ComponentNotFoundException;
 
@@ -16,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Iterators.filter;
 import static com.google.common.collect.Iterators.transform;
 
 public class PillBox {
@@ -167,15 +164,9 @@ public class PillBox {
     }
 
     private static Map buildSetterArgs(Class implClass) {
-        final List<Method> methods = Lists.newArrayList(implClass.getDeclaredMethods());
-        final UnmodifiableIterator<Method> setterMethods = filter(methods.iterator(), new Predicate<Method>() {
-            @Override
-            public boolean apply(Method method) {
-                return method.getName().startsWith("set");
-            }
-        });
+        final List<Method> setterMethods = ClassHelper.getSetterMethods(implClass);
         final HashMap<String, String> propertiesMap = Maps.newHashMap();
-        for (final Method setterMethod : Lists.newArrayList(setterMethods)) {
+        for (final Method setterMethod : setterMethods) {
             propertiesMap.put(PropertyHelper.propertyNameOf(setterMethod), setterMethod.getParameterTypes()[0].getCanonicalName());
         }
         return propertiesMap;

@@ -2,7 +2,11 @@ import com.tw.container.Lifecycle;
 import com.tw.container.PillContainer;
 import com.tw.container.exception.ComponentNotFoundException;
 import com.tw.container.exception.CyclicDependencyException;
+import com.tw.container.exception.MultipleConstructorsException;
+import com.tw.container.exception.MultipleSetterException;
 import example.beans.BadService;
+import example.beans.MultipleConstructorsService;
+import example.beans.MultipleSetterServiceComsumer;
 import example.beans.PrivateService;
 import example.beans.Service;
 import example.beans.ServiceConsumer;
@@ -104,5 +108,18 @@ public class NewIoCTest {
     public void should_throw_component_not_found_exception() throws Exception  {
         pillContainer.register(ServiceConsumer.class, SetterConsumer.class);
         pillContainer.get(Service.class);
+    }
+
+    @Test(expected = MultipleConstructorsException.class)
+    public void should_throw_multiple_constructors_exception_if_class_has_more_than_one_constructor() throws Exception {
+        pillContainer.register(Service.class, MultipleConstructorsService.class);
+        pillContainer.get(Service.class);
+    }
+
+    @Test(expected = MultipleSetterException.class)
+    public void should_throw_multiple_setters_exception_if_class_has_more_than_three_setters() throws Exception {
+        pillContainer.register(Service.class, ServiceImplementation.class);
+        pillContainer.register(ServiceConsumer.class, MultipleSetterServiceComsumer.class);
+        pillContainer.get(ServiceConsumer.class);
     }
 }
