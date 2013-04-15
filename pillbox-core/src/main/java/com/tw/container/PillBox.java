@@ -1,7 +1,6 @@
 package com.tw.container;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tw.annotation.PillScanner;
@@ -10,12 +9,9 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Iterators.all;
-import static com.google.common.collect.Iterators.find;
 import static com.google.common.collect.Iterators.transform;
 
 public class PillBox {
@@ -181,8 +177,4 @@ public class PillBox {
         return createPill(aClass.getCanonicalName());
     }
 
-    public <T> PillBox updateLifecycle(Class<T> aClass, Lifecycle lifecycle) {
-        pillContext.updateLifecycle(aClass, lifecycle);
-        return this;
-    }
 }

@@ -2,30 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79f3eb72-445d-4405-841e-119b4dd6371c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/BadService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/resources/com/tw/container/exception/CyclicDependencyException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/resources/com/tw/container/Lifecycle.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/MultipleConstructorsService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/MultipleParametersServiceConsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/MultipleSetterServiceComsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContainer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/PrivateService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/Service.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/ServiceConsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/ServiceConsumerImplementation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/ServiceImplementation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/SetterConsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/example/beans/TransientServiceConsumer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pillbox-core/src/test/java/IoCTest.java" afterPath="$PROJECT_DIR$/pillbox-core/src/test/java/IoCTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/pillbox-core/src/main/resources/com/tw/container/Lifecycle.java" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/Lifecycle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContext.java" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContainer.java" afterPath="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pillbox2.iws" afterPath="$PROJECT_DIR$/pillbox2.iws" />
     </list>
     <ignored path="pillbox2.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366003870374" ignored="false" />
     <file path="$PROJECT_DIR$/pillbox-example/build/classes/main/PillMaster.class" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366003020728" ignored="false" />
     <file path="/BadService.java" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366003938300" ignored="false" />
-    <file path="/fragment.java" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366033857413" ignored="false" />
+    <file path="/fragment.java" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366035512614" ignored="false" />
     <file path="/IoCTest.java" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366032692535" ignored="false" />
     <file path="/PillBox.java" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366034577375" ignored="false" />
     <file path="/PillContainer.java" changelist="79f3eb72-445d-4405-841e-119b4dd6371c" time="1366034613252" ignored="false" />
@@ -107,10 +94,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lifecycle.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/resources/com/tw/container/Lifecycle.java">
+      <file leaf-file-name="Lifecycle.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/Lifecycle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="26" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0">
+            <state line="2" column="12" selection-start="39" selection-end="39" vertical-scroll-proportion="0.11838006">
               <folding />
             </state>
           </provider>
@@ -161,10 +148,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PillContainer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PillContainer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="28" selection-start="805" selection-end="805" vertical-scroll-proportion="0.25974026">
+            <state line="22" column="88" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -175,13 +162,13 @@
       <file leaf-file-name="PillBox.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="159" column="90" selection-start="6599" selection-end="6599" vertical-scroll-proportion="0.0">
+            <state line="179" column="0" selection-start="7446" selection-end="7446" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4229#4840#0" expanded="true" />
-                <element signature="e#4829#4830#0" expanded="true" />
-                <element signature="e#4995#5360#0" expanded="true" />
-                <element signature="e#5349#5350#0" expanded="true" />
+                <element signature="e#4049#4660#0" expanded="true" />
+                <element signature="e#4649#4650#0" expanded="true" />
+                <element signature="e#4815#5180#0" expanded="true" />
+                <element signature="e#5169#5170#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -221,8 +208,8 @@
         <option value="$PROJECT_DIR$/pillbox-core/src/main/resources/com/tw/container/Lifecycle.java" />
         <option value="$PROJECT_DIR$/pillbox-core/src/test/java/IoCTest.java" />
         <option value="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContext.java" />
-        <option value="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java" />
         <option value="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContainer.java" />
+        <option value="$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java" />
       </list>
     </option>
   </component>
@@ -500,6 +487,10 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -590,6 +581,44 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="container" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pillbox2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pillbox2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pillbox-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -627,6 +656,7 @@
       <recent name="com.tw.container.exception" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.tw.container" />
       <recent name="example" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -1040,30 +1070,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/resources/com/tw/container/Lifecycle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="26" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="66" selection-start="1750" selection-end="1750" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="90" selection-start="6599" selection-end="6599" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4229#4840#0" expanded="true" />
-            <element signature="e#4829#4830#0" expanded="true" />
-            <element signature="e#4995#5360#0" expanded="true" />
-            <element signature="e#5349#5350#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1076,12 +1086,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="179" column="0" selection-start="7446" selection-end="7446" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4049#4660#0" expanded="true" />
+            <element signature="e#4649#4650#0" expanded="true" />
+            <element signature="e#4815#5180#0" expanded="true" />
+            <element signature="e#5169#5170#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/PillContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="28" selection-start="805" selection-end="805" vertical-scroll-proportion="0.25974026">
+        <state line="22" column="88" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pillbox-core/src/main/java/com/tw/container/Lifecycle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="12" selection-start="39" selection-end="39" vertical-scroll-proportion="0.11838006">
+          <folding />
         </state>
       </provider>
     </entry>

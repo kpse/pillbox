@@ -23,8 +23,7 @@ public class PillContainer {
     public <T> void register(Class<T> aClass, Class<? extends T> implementationClass, Lifecycle lifecycle) {
         classHashMap.put(aClass, implementationClass);
         lifecycleMap.put(aClass, lifecycle);
-        pillbox = PillBox.fromMap(classHashMap, lifecycleMap)
-                .updateLifecycle(aClass, lifecycle);
+        pillbox = PillBox.fromMap(classHashMap, lifecycleMap);
     }
 
     public <T> void register(Class<T> aClass, Class<? extends T> implementationClass) {
