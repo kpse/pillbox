@@ -1,0 +1,12 @@
+milk:
+  class : example.BabyMilk
+  constructor-args:
+        1 : protein
+        2 : fat
+        3 : linoleicAcid
+protein:
+  class : example.Protein
+fat:
+  class : example.Fat
+linoleicAcid:
+  class : example.LinoleicAcid

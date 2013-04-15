@@ -1,0 +1,64 @@
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile group: 'com.google.guava', name: 'guava', version: '14.0.1'
+        testCompile group: 'junit', name: 'junit', version: '4.+'
+    }
+
+}
+
+subprojects {
+
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+
+    project.ext {
+        guavaVersion = '14.0.1'
+        junitVersion = '4.10'
+        hamcrestVersion = '1.3'
+    }
+
+    dependencies {
+        testCompile(
+                "junit:junit-dep:$junitVersion",
+                "org.hamcrest:hamcrest-core:$hamcrestVersion",
+                "org.hamcrest:hamcrest-library:$hamcrestVersion",
+        )
+    }
+
+    version = '1.0'
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+
+    task sourcesJar(type: Jar, dependsOn:classes) {
+        classifier = 'sources'
+        from sourceSets.main.allJava.srcDirs
+        include '**/*.java', '**/*.yml'
+    }
+
+    build.dependsOn sourcesJar
+
+}
+
+project(":pillbox-core") {
+    dependencies {
+        compile group: 'org.yaml', name: 'snakeyaml', version: '1.12'
+    }
+}
+
+project(":pillbox-example") {
+    dependencies {
+        compile project(':pillbox-core')
+    }
+}
+
+
+
+

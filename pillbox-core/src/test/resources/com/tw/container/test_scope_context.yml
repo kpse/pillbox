@@ -1,0 +1,16 @@
+milk:
+  class : example.ManualMilk
+  properties:
+        protein : protein
+        fat : fat
+        linoleicAcid : linoleicAcid
+protein:
+  class : example.Protein
+  scope : singleton
+fat:
+  class : example.Fat
+  scope : prototype
+linoleicAcid:
+  class : example.LinoleicAcid
+
+

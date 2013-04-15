@@ -1,0 +1,27 @@
+a:
+  class : pills.Methamphetamine
+b:
+  class : pills.Marijuana
+c:
+  class : pills.Cocaine
+
+milk:
+  class : milk.BabyMilk
+  constructor-args:
+        1 : protein
+        2 : fat
+        3 : linoleicAcid
+protein:
+  class : milk.Protein
+  scope : singleton
+fat:
+  class : milk.Fat
+linoleicAcid:
+  class : milk.LinoleicAcid
+
+manual_milk:
+  class : milk.ManualMilk
+  properties:
+        protein : protein
+        fat : fat
+        linoleicAcid : linoleicAcid

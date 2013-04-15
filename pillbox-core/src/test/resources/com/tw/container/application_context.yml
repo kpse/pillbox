@@ -1,0 +1,4 @@
+aspirin:
+  class : example.Aspirin
+vitamin:
+  class : example.Vitamin

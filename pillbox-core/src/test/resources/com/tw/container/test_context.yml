@@ -1,0 +1,4 @@
+test:
+  class : example.Aspirin
+test2:
+  class : example.Aspirin
