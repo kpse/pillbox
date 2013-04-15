@@ -3,9 +3,11 @@ import com.tw.container.PillContainer;
 import com.tw.container.exception.ComponentNotFoundException;
 import com.tw.container.exception.CyclicDependencyException;
 import com.tw.container.exception.MultipleConstructorsException;
+import com.tw.container.exception.MultipleParametersException;
 import com.tw.container.exception.MultipleSetterException;
 import example.beans.BadService;
 import example.beans.MultipleConstructorsService;
+import example.beans.MultipleParametersServiceConsumer;
 import example.beans.MultipleSetterServiceComsumer;
 import example.beans.PrivateService;
 import example.beans.Service;
@@ -120,6 +122,13 @@ public class NewIoCTest {
     public void should_throw_multiple_setters_exception_if_class_has_more_than_three_setters() throws Exception {
         pillContainer.register(Service.class, ServiceImplementation.class);
         pillContainer.register(ServiceConsumer.class, MultipleSetterServiceComsumer.class);
+        pillContainer.get(ServiceConsumer.class);
+    }
+
+    @Test(expected = MultipleParametersException.class)
+    public void should_throw_multiple_parameters_exception_if_constructor_has_more_than_three_parameters() throws Exception{
+        pillContainer.register(Service.class, ServiceImplementation.class);
+        pillContainer.register(ServiceConsumer.class, MultipleParametersServiceConsumer.class);
         pillContainer.get(ServiceConsumer.class);
     }
 }

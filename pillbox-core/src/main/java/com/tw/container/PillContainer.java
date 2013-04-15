@@ -3,6 +3,7 @@ package com.tw.container;
 import com.google.common.collect.Maps;
 import com.tw.container.exception.ComponentNotFoundException;
 import com.tw.container.exception.MultipleConstructorsException;
+import com.tw.container.exception.MultipleParametersException;
 import com.tw.container.exception.MultipleSetterException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -45,16 +46,17 @@ public class PillContainer {
         this(null);
     }
 
-    public <T> void register(Class<T> aClass, Class<? extends T> implementationClass, Lifecycle lifecycle) throws MultipleConstructorsException, MultipleSetterException {
+    public <T> void register(Class<T> aClass, Class<? extends T> implementationClass, Lifecycle lifecycle) throws Exception {
         ContainerGuardian.assertSingleConstructor(implementationClass);
         ContainerGuardian.assertSingleSetterForEachType(implementationClass);
+        ContainerGuardian.assertNonDuplicatedParameterTypeConstructor(implementationClass);
         classHashMap.put(aClass, implementationClass);
         lifecycleMap.put(aClass, lifecycle);
         merge(parent);
         pillbox = PillBox.fromMap(classHashMap, lifecycleMap);
     }
 
-    public <T> void register(Class<T> aClass, Class<? extends T> implementationClass) throws MultipleConstructorsException, MultipleSetterException {
+    public <T> void register(Class<T> aClass, Class<? extends T> implementationClass) throws Exception {
         register(aClass, implementationClass, Lifecycle.Transient);
     }
 
