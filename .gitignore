@@ -2,3 +2,7 @@
 .idea/
 build/
 out/
+pillbox-core/pillbox-core.iml
+pillbox-example/pillbox-example.iml
+pillbox2.iml
+pillbox2.ipr
