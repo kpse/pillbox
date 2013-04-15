@@ -1,6 +1,7 @@
 package com.tw.container;
 
 import com.google.common.collect.Maps;
+import com.tw.container.exception.ComponentNotFoundException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class PillContainer {
             ClassNotFoundException,
             NoSuchMethodException,
             NoSuchFieldException,
-            InvocationTargetException {
+            InvocationTargetException, ComponentNotFoundException {
         return pillbox.createPill(aClass);
 
     }

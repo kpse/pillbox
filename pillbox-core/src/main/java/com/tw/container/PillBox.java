@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.UnmodifiableIterator;
 import com.tw.annotation.PillScanner;
+import com.tw.container.exception.ComponentNotFoundException;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
@@ -35,7 +36,7 @@ public class PillBox {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException,
-            NoSuchFieldException {
+            NoSuchFieldException, ComponentNotFoundException {
         final Map<String, Object> objectInfo = pillContext.getPill(pillName);
 
         Object target = pillContext.lookupFromCache(pillName);
@@ -51,7 +52,11 @@ public class PillBox {
             InstantiationException,
             IllegalAccessException,
             InvocationTargetException,
-            NoSuchFieldException {
+            NoSuchFieldException,
+            ComponentNotFoundException {
+        if (clazz.isInterface()){
+            throw new ComponentNotFoundException();
+        }
         final Map pillArgs = objectInfo.containsKey(CONSTRUCTOR_ARGS_KEY) ?
                 (Map) objectInfo.get(CONSTRUCTOR_ARGS_KEY) :
                 Maps.newHashMap();
@@ -71,7 +76,7 @@ public class PillBox {
             ClassNotFoundException,
             NoSuchMethodException,
             InstantiationException,
-            InvocationTargetException {
+            InvocationTargetException, ComponentNotFoundException {
         Class<?> objectClass = object.getClass();
         for (Map.Entry<String, String> prop : properties.entrySet()) {
             Method m = objectClass.getMethod(PropertyHelper.setterNameOf(prop.getKey()), pillContext.getPillClass(prop.getValue()));
@@ -114,6 +119,7 @@ public class PillBox {
                 } catch (InstantiationException e) {
                 } catch (IllegalAccessException e) {
                 } catch (NoSuchFieldException e) {
+                } catch (ComponentNotFoundException e) {
                 }
                 return null;
             }
@@ -138,7 +144,7 @@ public class PillBox {
         return new PillBox(pillContext);
     }
 
-    public <T> T createPill(String name) throws NoSuchMethodException, IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, ClassNotFoundException {
+    public <T> T createPill(String name) throws NoSuchMethodException, IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, ClassNotFoundException, ComponentNotFoundException {
         return (T) createRawPill(name);
     }
 
@@ -187,7 +193,7 @@ public class PillBox {
         return map;
     }
 
-    public <T> T createPill(Class<T> aClass) throws NoSuchMethodException, IllegalAccessException, InstantiationException, ClassNotFoundException, InvocationTargetException, NoSuchFieldException {
+    public <T> T createPill(Class<T> aClass) throws NoSuchMethodException, IllegalAccessException, InstantiationException, ClassNotFoundException, InvocationTargetException, NoSuchFieldException, ComponentNotFoundException {
         return createPill(aClass.getCanonicalName());
     }
 

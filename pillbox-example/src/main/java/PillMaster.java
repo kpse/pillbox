@@ -11,12 +11,12 @@ import java.net.URL;
 import static com.google.common.io.Resources.getResource;
 
 public class PillMaster {
-    public static void main(String[] arg) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, FileNotFoundException, NoSuchFieldException {
+    public static void main(String[] arg) throws Exception {
         configuredExample();
         scannedExample();
     }
 
-    private static void scannedExample() throws NoSuchMethodException, IllegalAccessException, InstantiationException, ClassNotFoundException, InvocationTargetException, NoSuchFieldException {
+    private static void scannedExample() throws Exception {
         PillScanner pillScanner = new PillScanner();
         pillScanner.scanPackage("scan_targets");
         final PillBox pillBox = PillBox.fromScanner(pillScanner);
@@ -26,7 +26,7 @@ public class PillMaster {
         System.out.println(gun.getBullet());
     }
 
-    private static void configuredExample() throws FileNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, ClassNotFoundException {
+    private static void configuredExample() throws Exception {
         final URL resource = getResource("application_context.yml");
         final PillBox pillBox = PillBox.loadContext(resource.getFile());
         System.out.println(pillBox.createPill("a"));

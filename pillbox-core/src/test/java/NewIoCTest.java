@@ -1,5 +1,6 @@
 import com.tw.container.Lifecycle;
 import com.tw.container.PillContainer;
+import com.tw.container.exception.ComponentNotFoundException;
 import com.tw.container.exception.CyclicDependencyException;
 import example.beans.BadService;
 import example.beans.PrivateService;
@@ -30,7 +31,7 @@ public class NewIoCTest {
     }
 
     @Test
-    public void should_be_able_to_create_instance_with_zero_constructor() throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+    public void should_be_able_to_create_instance_with_zero_constructor() throws Exception {
         pillContainer.register(Service.class, ServiceImplementation.class);
 
         Service service = pillContainer.get(Service.class);
@@ -38,7 +39,7 @@ public class NewIoCTest {
     }
 
     @Test
-    public void should_be_able_to_inject_service_to_constructor() throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+    public void should_be_able_to_inject_service_to_constructor() throws Exception  {
         pillContainer.register(ServiceConsumer.class, ServiceConsumerImplementation.class);
         pillContainer.register(Service.class, ServiceImplementation.class);
 
@@ -48,7 +49,7 @@ public class NewIoCTest {
 
     @Ignore
     @Test(expected = CyclicDependencyException.class)
-    public void should_throw_exception_if_cyclic_dependency() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+    public void should_throw_exception_if_cyclic_dependency() throws Exception  {
         pillContainer.register(ServiceConsumer.class, ServiceConsumerImplementation.class);
         pillContainer.register(Service.class, BadService.class);
 
@@ -57,7 +58,7 @@ public class NewIoCTest {
 
     @Test
     @Ignore
-    public void should_inject_instance_to_constructor() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+    public void should_inject_instance_to_constructor() throws Exception  {
         pillContainer.register(ServiceConsumer.class, ServiceConsumerImplementation.class);
         pillContainer.register(Service.class, PrivateService.getInstance());
 
@@ -66,7 +67,7 @@ public class NewIoCTest {
     }
 
     @Test
-    public void should_be_able_to_declare_service_lifecycle() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+    public void should_be_able_to_declare_service_lifecycle() throws Exception  {
         pillContainer.register(Service.class, ServiceImplementation.class, Lifecycle.Singleton);
         pillContainer.register(ServiceConsumer.class, TransientServiceConsumer.class, Lifecycle.Transient);
 
@@ -78,7 +79,7 @@ public class NewIoCTest {
     }
 
     @Test
-    public void should_be_able_to_inject_service_via_setter() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+    public void should_be_able_to_inject_service_via_setter() throws Exception  {
         pillContainer.register(Service.class, ServiceImplementation.class);
         pillContainer.register(ServiceConsumer.class, SetterConsumer.class);
 
@@ -87,7 +88,7 @@ public class NewIoCTest {
     }
 
     @Test
-    public void should_find_service_from_parent_container() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+    public void should_find_service_from_parent_container() throws Exception  {
         PillContainer grandfather = PillContainer.createRawBox();
         PillContainer father = PillContainer.createFrom(grandfather);
         PillContainer son = PillContainer.createFrom(father);
@@ -97,5 +98,11 @@ public class NewIoCTest {
 
         ServiceConsumer consumer = son.get(ServiceConsumer.class);
         assertThat(consumer.service(), is(ServiceImplementation.class.getCanonicalName()));
+    }
+
+    @Test(expected = ComponentNotFoundException.class)
+    public void should_throw_component_not_found_exception() throws Exception  {
+        pillContainer.register(ServiceConsumer.class, SetterConsumer.class);
+        pillContainer.get(Service.class);
     }
 }
