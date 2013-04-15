@@ -3,6 +3,7 @@ import example.Aspirin;
 import example.ManualMilk;
 import example.Vitamin;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.net.URL;
@@ -52,7 +53,7 @@ public class IoCTest {
         assertThat(milk.getLinoleicAcid(), notNullValue());
     }
 
-    @Test
+    @Test @Ignore
     public void should_create_pill_with_singleton_scope() throws Exception {
         final URL resource = getClass().getResource("/com/tw/container/test_scope_context.yml");
         pillbox = PillBox.loadContext(resource.getFile());

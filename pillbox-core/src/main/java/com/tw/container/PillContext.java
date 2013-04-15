@@ -28,8 +28,7 @@ public class PillContext {
     }
 
     public Class<?> getPillClass(String pillName) throws ClassNotFoundException {
-        Map<String, Object> pill = getPill(pillName);
-        return Class.forName(pill.get(CLASS_KEY).toString());
+        return Class.forName(pillName);
     }
 
     public Object lookupFromCache(String pillName) {
@@ -49,8 +48,9 @@ public class PillContext {
 
     }
 
-    public <T> void updateLifecycle(Class<T> aClass, Lifecycle lifecycle) {
-        Map objectInfo = getPill(aClass.getCanonicalName());
-        objectInfo.put(SCOPE, lifecycle.scopeName());
+    public Class<?> getPillImplClass(String pillName) throws ClassNotFoundException {
+        Map<String, Object> pill = getPill(pillName);
+        final String className = pill.get(CLASS_KEY) == null ? pillName : pill.get(CLASS_KEY).toString();
+        return Class.forName(className);
     }
 }

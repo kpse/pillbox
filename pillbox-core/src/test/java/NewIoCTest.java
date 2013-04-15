@@ -7,6 +7,7 @@ import example.beans.Service;
 import example.beans.ServiceConsumer;
 import example.beans.ServiceConsumerImplementation;
 import example.beans.ServiceImplementation;
+import example.beans.SetterConsumer;
 import example.beans.TransientServiceConsumer;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -74,5 +75,14 @@ public class NewIoCTest {
 
         assertThat(first, not(sameInstance(second)));
         assertThat(first.getService(), sameInstance(second.getService()));
+    }
+
+    @Test
+    public void should_be_able_to_inject_service_via_setter() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+        pillContainer.register(Service.class, ServiceImplementation.class);
+        pillContainer.register(ServiceConsumer.class, SetterConsumer.class);
+
+        ServiceConsumer consumer = pillContainer.get(ServiceConsumer.class);
+        assertThat(consumer.service(), is(ServiceImplementation.class.getCanonicalName()));
     }
 }

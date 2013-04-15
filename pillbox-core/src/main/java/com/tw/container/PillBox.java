@@ -1,17 +1,21 @@
 package com.tw.container;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.UnmodifiableIterator;
 import com.tw.annotation.PillScanner;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.collect.Iterators.filter;
 import static com.google.common.collect.Iterators.transform;
 
 public class PillBox {
@@ -38,7 +42,7 @@ public class PillBox {
         if (target != null) {
             return target;
         }
-        return createObject(objectInfo, pillContext.getPillClass(pillName));
+        return createObject(objectInfo, pillContext.getPillImplClass(pillName));
     }
 
     private Object createObject(Map<String, Object> objectInfo, Class<?> clazz)
@@ -70,14 +74,10 @@ public class PillBox {
             InvocationTargetException {
         Class<?> objectClass = object.getClass();
         for (Map.Entry<String, String> prop : properties.entrySet()) {
-            Method m = objectClass.getMethod(setterNameOf(prop.getKey()), pillContext.getPillClass(prop.getValue()));
+            Method m = objectClass.getMethod(PropertyHelper.setterNameOf(prop.getKey()), pillContext.getPillClass(prop.getValue()));
             m.invoke(object, createRawPill(prop.getValue()));
         }
         return object;
-    }
-
-    private String setterNameOf(String propertyName) {
-        return "set" + Character.toUpperCase(propertyName.charAt(0)) + propertyName.substring(1);
     }
 
     private Object createObjectWithConstructor(Class<?> clazz, Map argPills)
@@ -152,6 +152,7 @@ public class PillBox {
             Map<Object, Object> objectMap = Maps.newHashMap();
             objectMap.put("class", clazzEntry.getValue().getCanonicalName());
             objectMap.put("constructor-args", buildConstructorArgs(clazzEntry.getValue()));
+            objectMap.put("properties", buildSetterArgs(clazzEntry.getValue()));
             objectMap.put("scope", lifecycleMap.get(clazzEntry.getKey()).scopeName());
             pillMap.put(clazzEntry.getKey().getCanonicalName(), objectMap);
             pillMap.put(clazzEntry.getValue().getCanonicalName(), objectMap);
@@ -159,10 +160,23 @@ public class PillBox {
         return new PillBox(new PillContext(pillMap));
     }
 
+    private static Map buildSetterArgs(Class implClass) {
+        final List<Method> methods = Lists.newArrayList(implClass.getDeclaredMethods());
+        final UnmodifiableIterator<Method> setterMethods = filter(methods.iterator(), new Predicate<Method>() {
+            @Override
+            public boolean apply(Method method) {
+                return method.getName().startsWith("set");
+            }
+        });
+        final HashMap<String, String> propertiesMap = Maps.newHashMap();
+        for (final Method setterMethod : Lists.newArrayList(setterMethods)) {
+            propertiesMap.put(PropertyHelper.propertyNameOf(setterMethod), setterMethod.getParameterTypes()[0].getCanonicalName());
+        }
+        return propertiesMap;
+    }
+
     private static Map<String, String> buildConstructorArgs(Class implClass) {
-        final List<Constructor> constructors = Lists.newArrayList(implClass.getConstructors());
-        final Constructor<?> constructor = constructors.get(0);
-        return reportConstructorArgs(constructor);
+        return reportConstructorArgs(implClass.getConstructors()[0]);
     }
 
     private static Map<String, String> reportConstructorArgs(Constructor<?> constructor) {

@@ -6,7 +6,7 @@ import com.tw.annotation.Pill;
 @Pill(name="brufenBottle")
 public class BrufenBottle {
 
-    @AutoInject(name="brufen")
+    @AutoInject(name="annotation_example.Brufen")
     private Brufen pill;
 
     public void setPill(Brufen pill) {

@@ -1,12 +1,6 @@
 milk:
   class : example.ManualMilk
   properties:
-        protein : protein
-        fat : fat
-        linoleicAcid : linoleicAcid
-protein:
-  class : example.Protein
-fat:
-  class : example.Fat
-linoleicAcid:
-  class : example.LinoleicAcid
+        protein : example.Protein
+        fat : example.Fat
+        linoleicAcid : example.LinoleicAcid
