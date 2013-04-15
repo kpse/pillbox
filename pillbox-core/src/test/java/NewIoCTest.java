@@ -85,4 +85,17 @@ public class NewIoCTest {
         ServiceConsumer consumer = pillContainer.get(ServiceConsumer.class);
         assertThat(consumer.service(), is(ServiceImplementation.class.getCanonicalName()));
     }
+
+    @Test
+    public void should_find_service_from_parent_container() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException, NoSuchMethodException, ClassNotFoundException {
+        PillContainer grandfather = PillContainer.createRawBox();
+        PillContainer father = PillContainer.createFrom(grandfather);
+        PillContainer son = PillContainer.createFrom(father);
+
+        grandfather.register(Service.class, ServiceImplementation.class);
+        son.register(ServiceConsumer.class, SetterConsumer.class);
+
+        ServiceConsumer consumer = son.get(ServiceConsumer.class);
+        assertThat(consumer.service(), is(ServiceImplementation.class.getCanonicalName()));
+    }
 }
