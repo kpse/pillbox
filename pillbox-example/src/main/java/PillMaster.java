@@ -2,6 +2,10 @@ import com.tw.annotation.PillScanner;
 import com.tw.container.PillBox;
 import milk.BabyMilk;
 import milk.ManualMilk;
+import pills.Cocaine;
+import pills.Marijuana;
+import pills.Methamphetamine;
+import scan_targets.Bullet;
 import scan_targets.Gun;
 
 import java.io.FileNotFoundException;
@@ -20,7 +24,7 @@ public class PillMaster {
         PillScanner pillScanner = new PillScanner();
         pillScanner.scanPackage("scan_targets");
         final PillBox pillBox = PillBox.fromScanner(pillScanner);
-        System.out.println(pillBox.createPill("bullet"));
+        System.out.println(pillBox.<Bullet>createPill("bullet"));
         final Gun gun = pillBox.createPill("gun");
         System.out.println(gun);
         System.out.println(gun.getBullet());
@@ -29,9 +33,9 @@ public class PillMaster {
     private static void configuredExample() throws Exception {
         final URL resource = getResource("application_context.yml");
         final PillBox pillBox = PillBox.loadContext(resource.getFile());
-        System.out.println(pillBox.createPill("a"));
-        System.out.println(pillBox.createPill("b"));
-        System.out.println(pillBox.createPill("c"));
+        System.out.println(pillBox.<Methamphetamine>createPill("a"));
+        System.out.println(pillBox.<Marijuana>createPill("b"));
+        System.out.println(pillBox.<Cocaine>createPill("c"));
 
         BabyMilk milk = pillBox.createPill("milk");
         System.out.println(milk);
