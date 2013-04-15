@@ -1,6 +1,6 @@
 package example.beans;
 
-public class PrivateService implements Service{
+public class PrivateService implements Service {
     public static Service getInstance() {
         return new PrivateService();
     }
@@ -8,6 +8,7 @@ public class PrivateService implements Service{
     private PrivateService() {
 
     }
+
     @Override
     public String service() {
         return getClass().getCanonicalName();

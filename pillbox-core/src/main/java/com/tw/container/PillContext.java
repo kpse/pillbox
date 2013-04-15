@@ -8,7 +8,6 @@ public class PillContext {
     public static final String PILL_ID = "id";
     public static final String SCOPE = "scope";
     public static final String CLASS_KEY = "class";
-    public static final String SINGLETON_SCOPE = "singleton";
 
     private final Map<String, Map<String, Object>> map;
     private final Map<String, Object> allInstancesCache;

@@ -53,7 +53,8 @@ public class IoCTest {
         assertThat(milk.getLinoleicAcid(), notNullValue());
     }
 
-    @Test @Ignore
+    @Test
+    @Ignore
     public void should_create_pill_with_singleton_scope() throws Exception {
         final URL resource = getClass().getResource("/com/tw/container/test_scope_context.yml");
         pillbox = PillBox.loadContext(resource.getFile());

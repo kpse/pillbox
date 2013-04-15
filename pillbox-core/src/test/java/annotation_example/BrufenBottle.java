@@ -3,10 +3,10 @@ package annotation_example;
 import com.tw.annotation.AutoInject;
 import com.tw.annotation.Pill;
 
-@Pill(name="brufenBottle")
+@Pill(name = "brufenBottle")
 public class BrufenBottle {
 
-    @AutoInject(name="annotation_example.Brufen")
+    @AutoInject(name = "annotation_example.Brufen")
     private Brufen pill;
 
     public void setPill(Brufen pill) {

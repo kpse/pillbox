@@ -1,8 +1,6 @@
 package com.tw.container;
 
 import org.junit.Test;
-import com.tw.container.ContextLoader;
-import com.tw.container.PillContext;
 
 import java.net.URL;
 

@@ -5,7 +5,7 @@ import com.tw.annotation.Pill;
 
 @Pill(name = "gun")
 public class Gun {
-    @AutoInject(name = "bullet")
+    @AutoInject(name = "scan_targets.Bullet")
     private Bullet bullet;
 
     public Bullet getBullet() {

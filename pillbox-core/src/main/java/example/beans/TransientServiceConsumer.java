@@ -1,6 +1,6 @@
 package example.beans;
 
-public class TransientServiceConsumer implements ServiceConsumer{
+public class TransientServiceConsumer implements ServiceConsumer {
     private Service service;
 
     public TransientServiceConsumer(Service service) {

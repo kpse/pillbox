@@ -22,6 +22,6 @@ linoleicAcid:
 manual_milk:
   class : milk.ManualMilk
   properties:
-        protein : protein
-        fat : fat
-        linoleicAcid : linoleicAcid
+        protein : milk.Protein
+        fat : milk.Fat
+        linoleicAcid : milk.LinoleicAcid
