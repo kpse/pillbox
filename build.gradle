@@ -51,6 +51,10 @@ project(":pillbox-core") {
     dependencies {
         compile group: 'org.yaml', name: 'snakeyaml', version: '1.12'
     }
+
+    archivesBaseName = 'pillbox'
+    version = '1.0'
+    group = 'com.tw.container'
 }
 
 project(":pillbox-example") {
